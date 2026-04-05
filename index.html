@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>計算數字</title>
+</head>
+
+<body style="display: flex;  justify-content: center; flex-direction: column; align-items: center; height: 100vh;">
+    <h1 style="text-align: center; margin-bottom: 2px;">計算數字</h1>
+    <div style="display: flex; justify-content: center; align-items: center; gap: 5px;">
+        <input type="text" id="input-box-1" />
+        <p>+</p>
+        <input type="text" id="input-box-2" />
+        <p>=</p>
+        <p id="number-output">NaN</p>
+    </div>
+    <div style="display: flex;">
+        <p style="font-size: x-large;">數字：</p>
+        <p id="total-number" style="font-size: x-large;">0</p>
+    </div>
+    <div>
+        <button id="add-one">按我加一</button>
+        <button id="count">按我計算</button>
+    </div>
+</body>
+<script>
+    let buttonElement = document.getElementById('add-one');
+    let totalElement = document.getElementById('total-number');
+    let total = 0;
+    buttonElement.addEventListener('click', function () {
+        total++;
+        totalElement.innerText = total;
+    });
+
+    let addTotal = null;
+    let inputBox1Element = document.getElementById('input-box-1');
+    let inputBox2Element = document.getElementById('input-box-2');
+    let countElement = document.getElementById('count');
+    let numberOutput = document.getElementById('number-output');
+    countElement.addEventListener('click', ()=>{
+        let input1Number = Number(inputBox1Element.value);
+        let input2Number = Number(inputBox2Element.value);
+        numberOutput.innerText = input1Number + input2Number;
+    });
+</script>
+
+</html>
