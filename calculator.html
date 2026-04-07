@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0.1rem;
+        }
+
+        .section-1 {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .number {
+            width: 7rem;
+            height: 2rem;
+            border: thin solid gray;
+            font-size: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sym {
+            width: 2rem;
+            height: 2rem;
+            border: thin solid gray;
+            font-size: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .section-2 {
+            display: grid;
+            grid-template-columns: 5rem 5rem 5rem 5rem;
+            grid-template-rows: 5rem 5rem 5rem 5rem;
+            gap: 1rem;
+        }
+
+        .section-2 button {
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>超級計算機</h1>
+        <div class="section-1">
+            <p class="number" id="display-1"></p>
+            <p class="sym" id="display-2"></p>
+            <p class="number" id="display-3"></p>
+            <p class="sym" style="border: none!important;">=</p>
+            <p class="number" id="display-4"></p>
+        </div>
+        <div class="section-2">
+            <button id="button1">1</button>
+            <button id="button2">2</button>
+            <button id="button3">3</button>
+            <button id="buttonplus">+</button>
+            <button id="button4">4</button>
+            <button id="button5">5</button>
+            <button id="button6">6</button>
+            <button id="buttonsub">-</button>
+            <button id="button7">7</button>
+            <button id="button8">8</button>
+            <button id="button9">9</button>
+            <button id="buttontime">x</button>
+            <button style="visibility: hidden;">//</button>
+            <button id="button0">0</button>
+            <button id="buttonc">C</button>
+            <button id="buttondiv">÷</button>
+        </div>
+    </div>
+</body>
+<script>
+    const elementList = ['1', '2', '3', 'plus', '4', '5', '6',
+        'sub', '7', '8', '9', 'time', '0', 'c', 'div']
+    let displayFirst = document.getElementById('display-1')
+    let displaySym = document.getElementById('display-2')
+    let displaySecond = document.getElementById('display-3')
+    let displayResult = document.getElementById('display-4')
+    let firstNumber = null
+    let sym = null
+    let secondNumber = null
+
+    const clear = () => {
+        firstNumber = null
+        sym = null
+        secondNumber = null
+        displayFirst.innerText = ''
+        displaySym.innerText = ''
+        displaySecond.innerText = ''
+        displayResult.innerText = ''
+    }
+
+    elementList.forEach(item => {
+        let element = document.getElementById('button' + item)
+        element.addEventListener('click', () => {
+            if (item === 'plus') {
+                sym = '+'
+                displaySym.innerText = sym
+            } else if (item === 'sub') {
+                sym = '-'
+                displaySym.innerText = sym
+            } else if (item === 'time') {
+                sym = 'x'
+                displaySym.innerText = sym
+            } else if (item === 'div') {
+                sym = '÷'
+                displaySym.innerText = sym
+            } else if (item === 'c') {
+                clear()
+            } else {
+                if (firstNumber !== null) {
+                    secondNumber = Number(item)
+                    displaySecond.innerText = secondNumber
+                    if (sym) {
+                        switch (sym) {
+                            case '+':
+                                displayResult.innerText = firstNumber + secondNumber
+                                break;
+                            case '-':
+                                displayResult.innerText = firstNumber - secondNumber
+                                break;
+                            case 'x':
+                                displayResult.innerText = firstNumber * secondNumber
+                                break;
+                            case '÷':
+                                displayResult.innerText = (firstNumber / secondNumber).toFixed(2)
+                                break;
+                        }
+                    } else {
+                        clear()
+                        alert('請先按運算符號，已經清除')
+                    }
+                } else {
+                    firstNumber = Number(item)
+                    displayFirst.innerText = firstNumber
+                }
+            }
+        })
+    })
+</script>
+
+</html>
