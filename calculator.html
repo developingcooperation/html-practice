@@ -130,8 +130,8 @@
             } else if (item === 'c') {
                 clear()
             } else {
-                if (firstNumber !== null) {
-                    secondNumber = Number(item)
+                if (sym !== null) {
+                    secondNumber = Number((secondNumber !== null ? secondNumber : '') + item)
                     displaySecond.innerText = secondNumber
                     if (sym) {
                         switch (sym) {
@@ -153,7 +153,7 @@
                         alert('請先按運算符號，已經清除')
                     }
                 } else {
-                    firstNumber = Number(item)
+                    firstNumber = Number((firstNumber !== null ? firstNumber : '') + item)
                     displayFirst.innerText = firstNumber
                 }
             }
